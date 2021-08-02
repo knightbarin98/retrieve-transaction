@@ -9,13 +9,17 @@ import com.mrbarin.microservicios.retrievetransactionuser.api.client.RetrieveCur
 import com.mrbarin.microservicios.retrievetransactionuser.api.dto.request.RequestRetrieveTransaction;
 import com.mrbarin.microservicios.retrievetransactionuser.api.dto.response.ResponseTransactions;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Component
+@Slf4j
 public class RetrieveCurrentTransaction {
 	
 	@Autowired
 	private RetrieveCurrentTransactionClient client;
 	
 	public Optional<ResponseTransactions> consult(RequestRetrieveTransaction request){
-		return null;
+		log.info("Client request");
+		return Optional.of(client.getTransactions(request));
 	}
 }

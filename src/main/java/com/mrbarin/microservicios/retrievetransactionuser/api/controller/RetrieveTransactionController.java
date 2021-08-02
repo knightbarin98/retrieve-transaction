@@ -1,6 +1,5 @@
 package com.mrbarin.microservicios.retrievetransactionuser.api.controller;
 
-
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,29 +18,39 @@ import com.mrbarin.microservicios.retrievetransactionuser.api.dto.response.Respo
 import com.mrbarin.microservicios.retrievetransactionuser.api.handlerexeception.GlobalException;
 import com.mrbarin.microservicios.retrievetransactionuser.api.service.RetrieveTransactionService;
 
+import lombok.extern.slf4j.Slf4j;
+
 @RestController
+@Slf4j
 public class RetrieveTransactionController {
-	
+
 	@Autowired
 	private RetrieveTransactionService service;
-	
+
 	@Autowired
 	private ObjectMapper mapper;
-	
+
+	private GlobalException exception;
+
 	@Validate
 	@PostMapping("/retrieve-transaction-user")
 	@ResponseBody
-	public ResponseEntity<ResponseTransactions> retrieve(@RequestBody String json ) throws Throwable {
-		Optional<ResponseTransactions> responseService = service.getTransactions(mapper.readValue(json, RequestRetrieveTransaction.class));
-		if(responseService.isPresent()) 
+	public ResponseEntity<ResponseTransactions> retrieve(@RequestBody String json) throws Throwable {
+		log.info("Post request route: /retrieve-transaction-user");
+
+		Optional<ResponseTransactions> responseService = service
+				.getTransactions(mapper.readValue(json, RequestRetrieveTransaction.class));
+
+		if (responseService.isPresent()) {
+			log.info("Post request route: /retrieve-transaction-user. Success request");
 			return new ResponseEntity<>(responseService.get(), HttpStatus.OK);
-		else 
-			throw new GlobalException(new ErrorResponse(
-					"Not Found",
-					400,
-					"Transaccion no encontrada",
-					"La transacción que busca no se encuentra en nuestras bases de datos."
-					));
-		
+		} else {
+			exception = new GlobalException(new ErrorResponse("Not Found", 404, "Transaccion no encontrada",
+					"La transacción que busca no se encuentra en nuestras bases de datos."));
+			log.info("Exception 500", exception);
+			log.trace("Exception 500", exception);
+			throw exception;
+		}
+
 	}
 }

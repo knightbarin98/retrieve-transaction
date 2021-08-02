@@ -22,7 +22,7 @@ import lombok.extern.slf4j.Slf4j;
 public class RetrieveCurrentTransaction {
 
 	@Autowired
-	private RetrieveCurrentTransactionClient client;
+	private RetrieveCurrentTransactionClient retrieveCurrentTransactionClient;
 
 	public Optional<ResponseTransactions> consult(RequestRetrieveTransaction request) {
 		log.info("Client request");
@@ -32,7 +32,7 @@ public class RetrieveCurrentTransaction {
 		builder.append(String.valueOf(request.getBranchId()));
 		builder.delete(6, builder.length());
 
-		CurrentResponse response = client
+		CurrentResponse response = retrieveCurrentTransactionClient
 				.getTransactions(new RequestCurrentTransaction(Integer.parseInt(builder.toString()),
 						request.getTransactionDateStart(), request.getTransactionDateEnd()));
 

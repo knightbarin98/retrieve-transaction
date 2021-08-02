@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import com.mrbarin.microservicios.retrievetransactionuser.api.dto.current.response.CurrentResponse;
 import com.mrbarin.microservicios.retrievetransactionuser.api.dto.request.RequestCurrentTransaction;
 
-@FeignClient(url="http://RETRIEVE-CURRENT-TRANSACTION/",name="RetrieveCurrentTransactionClient")
+@FeignClient("RETRIEVE-CURRENT-TRANSACTION")
 public interface RetrieveCurrentTransactionClient {
 	
 	@PostMapping(value="/retrieve-current-information",consumes= MediaType.APPLICATION_JSON_VALUE)

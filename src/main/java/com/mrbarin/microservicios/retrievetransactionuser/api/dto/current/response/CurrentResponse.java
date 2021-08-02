@@ -9,12 +9,12 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-    "currentTransactions"
+    "transactions"
 })
 @Generated("jsonschema2pojo")
 public class CurrentResponse {
 
-    @JsonProperty("currentTransactions")
+    @JsonProperty("transactions")
     private List<CurrentTransaction> currentTransactions = null;
 
     /**
@@ -33,12 +33,12 @@ public class CurrentResponse {
         this.currentTransactions = currentTransactions;
     }
 
-    @JsonProperty("currentTransactions")
+    @JsonProperty("transactions")
     public List<CurrentTransaction> getTransactions() {
         return currentTransactions;
     }
 
-    @JsonProperty("currentTransactions")
+    @JsonProperty("transactions")
     public void setTransactions(List<CurrentTransaction> currentTransactions) {
         this.currentTransactions = currentTransactions;
     }

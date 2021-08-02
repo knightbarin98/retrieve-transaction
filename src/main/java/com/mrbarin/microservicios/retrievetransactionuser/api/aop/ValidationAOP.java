@@ -12,7 +12,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mrbarin.microservicios.retrievetransactionuser.api.dto.request.RequestRetrieveTransaction;
 import com.mrbarin.microservicios.retrievetransactionuser.api.dto.response.ErrorResponse;
 import com.mrbarin.microservicios.retrievetransactionuser.api.handlerexeception.GlobalException;
-import com.mrbarin.microservicios.retrievetransactionuser.api.handlerexeception.GlobalHandlerException;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -47,21 +46,35 @@ public class ValidationAOP {
 			throw exception;
 		}
 
-		if (request.getAccountId() == null) {
+		if (request.getAccountId() == null || request.getAccountId() == 0) {
 			exception = new GlobalException(
 					new ErrorResponse("Bad Request", 400, "accountId", "El campo accoutId no puede estar vacio"));
 			log.info("Exception 400", exception);
 			throw exception;
 		}
+		
+		if (String.valueOf(request.getAccountId()).length() < 6  ) {
+			exception = new GlobalException(
+					new ErrorResponse("Bad Request", 400, "accountId", "El campo accoutId no puede ser menor a 6 dígitos."));
+			log.info("Exception 400", exception);
+			throw exception;
+		}
 
-		if (request.getBranchId() == null) {
+		if (request.getBranchId() == null || request.getBranchId() == 0) {
 			exception = new GlobalException(
 					new ErrorResponse("Bad Request", 400, "branchtId", "El campo branchId no puede estar vacio"));
 			log.info("Exception 400", exception);
 			throw exception;
 		}
+		
+		if (String.valueOf(request.getBranchId()).length() < 6  ) {
+			exception = new GlobalException(
+					new ErrorResponse("Bad Request", 400, "branchtId", "El campo branchId no puede ser menor a 6 dígitos"));
+			log.info("Exception 400", exception);
+			throw exception;
+		}
 
-		if (request.getTransactionDateStart() == null) {
+		if (request.getTransactionDateStart() == null || request.getTransactionDateStart().isEmpty()) {
 			exception = new GlobalException(new ErrorResponse("Bad Request", 400, "transactionDateStart",
 					"El campo transactionDateStart no puede estar vacio"));
 
@@ -69,7 +82,7 @@ public class ValidationAOP {
 			throw exception;
 		}
 
-		if (request.getTransactionDateEnd() == null) {
+		if (request.getTransactionDateEnd() == null || request.getTransactionDateEnd().isEmpty()) {
 			exception = new GlobalException(new ErrorResponse("Bad Request", 400, "transactionDateEnd",
 					"El campo transactionDateEndno puede estar vacio"));
 			log.info("Exception 500", exception);

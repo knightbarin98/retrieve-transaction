@@ -18,16 +18,6 @@ public class GlobalException extends Throwable {
 	private static final long serialVersionUID = 1L;
 	private ErrorResponse errorResponse;
 
-	public GlobalException() {
 
-	}
-
-	public GlobalException(ErrorResponse errorResponse) {
-		this.errorResponse = errorResponse;
-	}
-
-	public ErrorResponse getErrorResponse() {
-		return this.errorResponse;
-	}
 
 }

@@ -8,13 +8,16 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
+	"_id",
     "customerId",
     "date",
     "transactionDescription"
 })
 @Generated("jsonschema2pojo")
 public class CurrentTransaction {
-
+	
+	@JsonProperty("_id")
+	private String _id;
     @JsonProperty("customerId")
     private Integer customerId;
     @JsonProperty("date")
@@ -30,16 +33,27 @@ public class CurrentTransaction {
     }
 
     /**
-     * 
+     * @param _id
      * @param date
      * @param customerId
      * @param transactionDescription
      */
-    public CurrentTransaction(Integer customerId, String date, TransactionDescription transactionDescription) {
+    public CurrentTransaction(String _id, Integer customerId, String date, TransactionDescription transactionDescription) {
         super();
+        this._id = _id;
         this.customerId = customerId;
         this.date = date;
         this.transactionDescription = transactionDescription;
+    }
+    
+    @JsonProperty("_id")
+    public String getId() {
+        return _id;
+    }
+
+    @JsonProperty("_id")
+    public void setCustomerId(String _id) {
+        this._id = _id;
     }
 
     @JsonProperty("customerId")

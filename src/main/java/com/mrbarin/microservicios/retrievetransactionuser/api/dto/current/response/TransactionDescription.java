@@ -2,6 +2,8 @@
 package com.mrbarin.microservicios.retrievetransactionuser.api.dto.current.response;
 
 import javax.annotation.Generated;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -14,9 +16,11 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 })
 @Generated("jsonschema2pojo")
 public class TransactionDescription {
-
+	
+	@JsonFormat(with = JsonFormat.Feature.ACCEPT_CASE_INSENSITIVE_PROPERTIES)
     @JsonProperty("TransactionType")
     private String transactionType;
+	@JsonFormat(with = JsonFormat.Feature.ACCEPT_CASE_INSENSITIVE_PROPERTIES)
     @JsonProperty("Descripcion")
     private String descripcion;
     @JsonProperty("amount")
@@ -41,22 +45,26 @@ public class TransactionDescription {
         this.descripcion = descripcion;
         this.amount = amount;
     }
-
+    
+    @JsonFormat(with = JsonFormat.Feature.ACCEPT_CASE_INSENSITIVE_PROPERTIES)
     @JsonProperty("TransactionType")
     public String getTransactionType() {
         return transactionType;
     }
-
+    
+    @JsonFormat(with = JsonFormat.Feature.ACCEPT_CASE_INSENSITIVE_PROPERTIES)
     @JsonProperty("TransactionType")
     public void setTransactionType(String transactionType) {
         this.transactionType = transactionType;
     }
-
+    
+    @JsonFormat(with = JsonFormat.Feature.ACCEPT_CASE_INSENSITIVE_PROPERTIES)
     @JsonProperty("Descripcion")
     public String getDescripcion() {
         return descripcion;
     }
-
+    
+    @JsonFormat(with = JsonFormat.Feature.ACCEPT_CASE_INSENSITIVE_PROPERTIES)
     @JsonProperty("Descripcion")
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
